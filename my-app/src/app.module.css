@@ -23,7 +23,9 @@ ol {
 }
 
 ol:hover {
-	background: #dad2ca;
+	background: #afa79f;
+	color: black;
+	font-weight: 600;
 }
 
 ol:hover:before {
@@ -48,7 +50,7 @@ ol:before {
 	transition: all 0.3s ease-out;
 }
 
-h5 {
+span {
 	position: absolute;
 	left: -1.3em;
 	top: 50%;
@@ -64,8 +66,37 @@ h5 {
 	transition: all 0.3s ease-out;
 }
 
-span {
-	font-size: 30px;
-	font-weight: bold;
-	color: blue;
+span:hover {
+	animation: span 1s infinite;
+}
+
+@keyframes span {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loader {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 30px;
+	height: 30px;
+	border: 5px solid blue;
+	border-radius: 50%;
+	border-left-color: transparent;
+	animation: loader 1s infinite;
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
