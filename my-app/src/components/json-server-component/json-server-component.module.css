@@ -3,3 +3,14 @@
 	padding: 0 20px;
 	margin: 2px;
 }
+
+h4 {
+	color: rgb(25, 129, 124);
+	font-size: 1.75rem;
+	text-align: center;
+	margin: 10px;
+}
+
+.form {
+	display: flex;
+}
