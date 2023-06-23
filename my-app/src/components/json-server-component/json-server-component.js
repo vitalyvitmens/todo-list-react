@@ -1,4 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import {
+	useRequestAddTodo,
+	useRequestDeleteTodo,
+	useRequestGetTodos,
+	useRequestUpdateTodo,
+} from './json-server-hooks/index'
 import styles from './json-server-component.module.css'
 
 //! JSON Server
@@ -9,83 +15,29 @@ import styles from './json-server-component.module.css'
 //! 4). json-server --watch src/db.json --port 3005 --delay 2000 (запуск json-server с задержкой подгрузки данных в 2 секунды)
 
 export const JsonServerComponent = ({ Loader }) => {
-	const [todosServer, setTodosServer] = useState([])
-	const [isLoadingJsonServerComponent, setIsLoadingJsonServerComponent] =
-		useState(false)
-	const [isCreating, setIsCreating] = useState(false)
-	const [isUpdating, setIsUpdating] = useState(false)
-	const [isDeleting, setIsDeleting] = useState(false)
 	const [todo, setTitle] = useState('')
 	const [refreshTodos, setRefreshTodos] = useState(false)
 
+	const { isLoadingJsonServerComponent, todosServer } =
+		useRequestGetTodos(refreshTodos)
+	const { isCreating, requestAddTodo } = useRequestAddTodo(
+		refreshTodos,
+		setRefreshTodos,
+		todo
+	)
+	const { isUpdating, requestUpdateTodo } = useRequestUpdateTodo(
+		refreshTodos,
+		setRefreshTodos,
+		todo
+	)
+	const { isDeleting, requestDeleteTodo } = useRequestDeleteTodo(
+		refreshTodos,
+		setRefreshTodos,
+		todo
+	)
+
 	const onTodoChange = ({ target }) => {
 		setTitle(target.value)
-	}
-
-	useEffect(() => {
-		setIsLoadingJsonServerComponent(true)
-
-		fetch('http://localhost:3005/todos')
-			.then((loadedData) => loadedData.json())
-			.then((loadedTodo) => {
-				setTodosServer(loadedTodo)
-			})
-			.finally(() => setIsLoadingJsonServerComponent(false))
-	}, [refreshTodos])
-
-	const requesAddTodo = () => {
-		setIsCreating(true)
-
-		fetch('http://localhost:3005/todos', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({
-				title: todo,
-				completed: false,
-			}),
-		})
-			.then((rawResponse) => rawResponse.json())
-			.then((response) => {
-				console.log(`Добавлена задача ${todo}, ответ сервера:`, response)
-				setRefreshTodos(!refreshTodos)
-			})
-			.finally(() => setIsCreating(false))
-	}
-
-	const requesUpdateTodo = () => {
-		setIsUpdating(true)
-
-		fetch(`http://localhost:3005/todos/4`, {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({
-				title: todo,
-				completed: false,
-			}),
-		})
-			.then((rawResponse) => rawResponse.json())
-			.then((response) => {
-				console.log(
-					`Задача: ${todo} с id: ${response.id} обновлена, ответ сервера:`,
-					response
-				)
-				setRefreshTodos(!refreshTodos)
-			})
-			.finally(() => setIsUpdating(false))
-	}
-
-	const requesDeleteTodo = () => {
-		setIsDeleting(true)
-
-		fetch('http://localhost:3005/todos/5', {
-			method: 'DELETE',
-		})
-			.then((rawResponse) => rawResponse.json())
-			.then((response) => {
-				console.log(`Задача ${todo} удалена, ответ сервера:`, response)
-				setRefreshTodos(!refreshTodos)
-			})
-			.finally(() => setIsDeleting(false))
 	}
 
 	const onSubmit = (e) => {
@@ -105,7 +57,7 @@ export const JsonServerComponent = ({ Loader }) => {
 					placeholder="New todo"
 					onChange={onTodoChange}
 				></input>
-				<button disabled={isCreating} onClick={requesAddTodo}>
+				<button disabled={isCreating} onClick={requestAddTodo}>
 					Add
 				</button>
 			</form>
@@ -120,14 +72,14 @@ export const JsonServerComponent = ({ Loader }) => {
 							<button
 								disabled={isUpdating}
 								className={styles.updateBtn}
-								onClick={requesUpdateTodo}
+								onClick={requestUpdateTodo}
 							>
 								✎
 							</button>
 							<button
 								disabled={isDeleting}
 								className={styles.deleteBtn}
-								onClick={requesDeleteTodo}
+								onClick={requestDeleteTodo}
 							>
 								X
 							</button>

@@ -1,0 +1,32 @@
+import { useState } from 'react'
+
+export const useRequestUpdateTodo = (refreshTodos, setRefreshTodos, todo) => {
+	const [isUpdating, setIsUpdating] = useState(false)
+
+	const requestUpdateTodo = () => {
+		setIsUpdating(true)
+
+		fetch(`http://localhost:3005/todos/4`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json;charset=utf-8' },
+			body: JSON.stringify({
+				title: todo,
+				completed: false,
+			}),
+		})
+			.then((rawResponse) => rawResponse.json())
+			.then((response) => {
+				console.log(
+					`Задача: ${todo} с id: ${response.id} обновлена, ответ сервера:`,
+					response
+				)
+				setRefreshTodos(!refreshTodos)
+			})
+			.finally(() => setIsUpdating(false))
+	}
+
+	return {
+		isUpdating,
+		requestUpdateTodo,
+	}
+}
