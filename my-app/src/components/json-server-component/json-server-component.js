@@ -12,7 +12,11 @@ export const JsonServerComponent = ({ Loader }) => {
 	const [todosServer, setTodosServer] = useState([])
 	const [isLoadingJsonServerComponent, setIsLoadingJsonServerComponent] =
 		useState(false)
-	const [title, setTitle] = useState('')
+	const [isCreating, setIsCreating] = useState(false)
+	const [isUpdating, setIsUpdating] = useState(false)
+	const [isDeleting, setIsDeleting] = useState(false)
+	const [todo, setTitle] = useState('')
+	const [refreshTodos, setRefreshTodos] = useState(false)
 
 	const onTodoChange = ({ target }) => {
 		setTitle(target.value)
@@ -27,42 +31,83 @@ export const JsonServerComponent = ({ Loader }) => {
 				setTodosServer(loadedTodo)
 			})
 			.finally(() => setIsLoadingJsonServerComponent(false))
-	}, [title])
+	}, [refreshTodos])
 
 	const requesAddTodo = () => {
+		setIsCreating(true)
+
 		fetch('http://localhost:3005/todos', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
 			body: JSON.stringify({
-				title: title,
+				title: todo,
 				completed: false,
 			}),
 		})
 			.then((rawResponse) => rawResponse.json())
 			.then((response) => {
-				console.log(`Добавлена задача ${title}, ответ сервера:`, response)
+				console.log(`Добавлена задача ${todo}, ответ сервера:`, response)
+				setRefreshTodos(!refreshTodos)
 			})
+			.finally(() => setIsCreating(false))
+	}
+
+	const requesUpdateTodo = () => {
+		setIsUpdating(true)
+
+		fetch(`http://localhost:3005/todos/4`, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json;charset=utf-8' },
+			body: JSON.stringify({
+				title: todo,
+				completed: false,
+			}),
+		})
+			.then((rawResponse) => rawResponse.json())
+			.then((response) => {
+				console.log(
+					`Задача: ${todo} с id: ${response.id} обновлена, ответ сервера:`,
+					response
+				)
+				setRefreshTodos(!refreshTodos)
+			})
+			.finally(() => setIsUpdating(false))
+	}
+
+	const requesDeleteTodo = () => {
+		setIsDeleting(true)
+
+		fetch('http://localhost:3005/todos/5', {
+			method: 'DELETE',
+		})
+			.then((rawResponse) => rawResponse.json())
+			.then((response) => {
+				console.log(`Задача ${todo} удалена, ответ сервера:`, response)
+				setRefreshTodos(!refreshTodos)
+			})
+			.finally(() => setIsDeleting(false))
 	}
 
 	const onSubmit = (e) => {
 		e.preventDefault()
+		console.log(e.target)
 	}
 
 	return (
 		<div className={styles.container}>
-			<h3>
-				2. Переделать приложение, заменив JSON Placeholder на JSON Server:
-			</h3>
-			<h4>My To-Do List</h4>
+			<h3>2. JSON Server</h3>
+			<h2>My To-Do List</h2>
 			<form className={styles.form} onSubmit={onSubmit}>
 				<input
 					type="text"
 					name="todo"
-					value={title}
+					value={todo}
 					placeholder="New todo"
 					onChange={onTodoChange}
 				></input>
-				<button onClick={requesAddTodo}>Add</button>
+				<button disabled={isCreating} onClick={requesAddTodo}>
+					Add
+				</button>
 			</form>
 			{isLoadingJsonServerComponent ? (
 				<Loader />
@@ -72,6 +117,20 @@ export const JsonServerComponent = ({ Loader }) => {
 						<ol>
 							<span>{id}</span>
 							{title}
+							<button
+								disabled={isUpdating}
+								className={styles.updateBtn}
+								onClick={requesUpdateTodo}
+							>
+								✎
+							</button>
+							<button
+								disabled={isDeleting}
+								className={styles.deleteBtn}
+								onClick={requesDeleteTodo}
+							>
+								X
+							</button>
 						</ol>
 					</div>
 				))

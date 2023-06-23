@@ -3,47 +3,27 @@
     {
       "title": "купи молоко",
       "completed": false,
+      "id": 1
+    },
+    {
+      "title": "выгуляй Ричи",
+      "completed": false,
+      "id": 2
+    },
+    {
+      "title": "купи хлеб",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "title": "88",
+      "completed": false,
       "id": 4
     },
     {
-      "title": "Покорми Ричи",
+      "title": "todo №5",
       "completed": false,
       "id": 5
-    },
-    {
-      "title": "Купи хлеб",
-      "completed": false,
-      "id": 6
-    },
-    {
-      "title": "Сходи в кино",
-      "completed": false,
-      "id": 7
-    },
-    {
-      "title": "Пошел в баню",
-      "completed": false,
-      "id": 8
-    },
-    {
-      "title": "Позвони маме",
-      "completed": false,
-      "id": 9
-    },
-    {
-      "title": "Подзаряди телефон",
-      "completed": false,
-      "id": 10
-    },
-    {
-      "title": "Купи сало",
-      "completed": false,
-      "id": 11
-    },
-    {
-      "title": "Вали домой с работы",
-      "completed": false,
-      "id": 12
     }
   ]
 }

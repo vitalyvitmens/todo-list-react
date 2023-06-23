@@ -21,10 +21,7 @@ export const JsonPlaceholderComponent = ({ Loader }) => {
 
 	return (
 		<div className={styles.container}>
-			<h3>
-				1. Реализовать приложение на базе Create React App — страницу со списком
-				дел (Todo list):
-			</h3>
+			<h3>1. JSON Placeholder</h3>
 			{isLoadingJsonPlaceholderComponent ? (
 				<Loader />
 			) : (

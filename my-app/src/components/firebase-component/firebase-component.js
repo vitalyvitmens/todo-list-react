@@ -19,10 +19,7 @@ export const FirebaseComponent = ({ Loader }) => {
 
 	return (
 		<div className={styles.container}>
-			<h3>
-				3. Переделать приложение из задания 2, используя Firebase (без
-				использования JSON Server):
-			</h3>
+			<h3>3. Firebase</h3>
 			{isLoadingFirebaseComponent ? (
 				<Loader />
 			) : (

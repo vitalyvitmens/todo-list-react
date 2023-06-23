@@ -13,23 +13,16 @@
 }
 
 h3 {
-  text-align: left;
+  text-align: center;
   color: black;
-  margin: 0;
-  padding: 0;
+  margin: 10px;
+  padding: 10px;
 }
 
 ol {
-	counter-reset: li;
-	list-style: none;
-	font: 14px 'Trebuchet MS', 'Lucida Sans';
-	padding: 0;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-ol {
+  font: 14px 'Trebuchet MS', 'Lucida Sans';
 	position: relative;
-	padding: 0.4em 0.4em 0.4em 2em;
+	padding: 0.4em 2em 0.4em 2em;
 	margin: 0.5em 0;
 	background: #dad2ca;
 	color: #444;
