@@ -1,6 +1,11 @@
 import { useState } from 'react'
 
-export const useRequestUpdateTodo = (refreshTodos, setRefreshTodos, todo) => {
+export const useRequestUpdateTodo = (
+	refreshTodos,
+	setRefreshTodos,
+	todo,
+	setTodo
+) => {
 	const [isUpdating, setIsUpdating] = useState(false)
 
 	const requestUpdateTodo = () => {
@@ -16,6 +21,7 @@ export const useRequestUpdateTodo = (refreshTodos, setRefreshTodos, todo) => {
 		})
 			.then((rawResponse) => rawResponse.json())
 			.then((response) => {
+				setTodo('')
 				console.log(
 					`Задача: ${todo} с id: ${response.id} обновлена, ответ сервера:`,
 					response
