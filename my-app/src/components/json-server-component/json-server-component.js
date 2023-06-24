@@ -12,10 +12,10 @@ import styles from './json-server-component.module.css'
 // 1). npm install -g json-server
 // 2). Create a db.json file with some data
 // 3). cd my-app
-//! 4). json-server --watch src/db.json --port 3005 --delay 2000 (запуск json-server с задержкой подгрузки данных в 2 секунды)
+//! 4). json-server --watch src/db.json --port 8204 --delay 2000 (запуск json-server с задержкой подгрузки данных в 2 секунды)
 
 export const JsonServerComponent = ({ Loader }) => {
-	const [todo, setTitle] = useState('')
+	const [todo, setTodo] = useState('')
 	const [refreshTodos, setRefreshTodos] = useState(false)
 
 	const { isLoadingJsonServerComponent, todosServer } =
@@ -23,7 +23,8 @@ export const JsonServerComponent = ({ Loader }) => {
 	const { isCreating, requestAddTodo } = useRequestAddTodo(
 		refreshTodos,
 		setRefreshTodos,
-		todo
+		todo,
+		setTodo
 	)
 	const { isUpdating, requestUpdateTodo } = useRequestUpdateTodo(
 		refreshTodos,
@@ -37,7 +38,7 @@ export const JsonServerComponent = ({ Loader }) => {
 	)
 
 	const onTodoChange = ({ target }) => {
-		setTitle(target.value)
+		setTodo(target.value)
 	}
 
 	const onSubmit = (e) => {
@@ -65,26 +66,24 @@ export const JsonServerComponent = ({ Loader }) => {
 				<Loader />
 			) : (
 				todosServer.map(({ id, title }) => (
-					<div key={id}>
-						<ol>
-							<span>{id}</span>
-							{title}
-							<button
-								disabled={isUpdating}
-								className={styles.updateBtn}
-								onClick={requestUpdateTodo}
-							>
-								✎
-							</button>
-							<button
-								disabled={isDeleting}
-								className={styles.deleteBtn}
-								onClick={requestDeleteTodo}
-							>
-								X
-							</button>
-						</ol>
-					</div>
+					<ol onClick={onSubmit} key={id}>
+						<span>{id}</span>
+						{title}
+						<button
+							disabled={isUpdating}
+							className={styles.updateBtn}
+							onClick={requestUpdateTodo}
+						>
+							✎
+						</button>
+						<button
+							disabled={isDeleting}
+							className={styles.deleteBtn}
+							onClick={requestDeleteTodo}
+						>
+							X
+						</button>
+					</ol>
 				))
 			)}
 		</div>

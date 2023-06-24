@@ -6,7 +6,7 @@ export const useRequestUpdateTodo = (refreshTodos, setRefreshTodos, todo) => {
 	const requestUpdateTodo = () => {
 		setIsUpdating(true)
 
-		fetch(`http://localhost:3005/todos/4`, {
+		fetch(`http://localhost:8204/todos/4`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
 			body: JSON.stringify({

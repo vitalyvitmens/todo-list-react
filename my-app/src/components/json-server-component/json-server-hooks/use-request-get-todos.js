@@ -8,7 +8,7 @@ export const useRequestGetTodos = (refreshTodos) => {
 	useEffect(() => {
 		setIsLoadingJsonServerComponent(true)
 
-		fetch('http://localhost:3005/todos')
+		fetch('http://localhost:8204/todos')
 			.then((loadedData) => loadedData.json())
 			.then((loadedTodo) => {
 				setTodosServer(loadedTodo)
