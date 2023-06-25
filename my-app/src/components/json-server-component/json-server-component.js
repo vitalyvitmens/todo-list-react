@@ -36,7 +36,7 @@ export const JsonServerComponent = ({ Loader }) => {
 		todo,
 		setTodo
 	)
-  
+
 	const { isDeleting, requestDeleteTodo } = useRequestDeleteTodo(
 		refreshTodos,
 		setRefreshTodos,
@@ -99,20 +99,21 @@ export const JsonServerComponent = ({ Loader }) => {
 			<h2>My To-Do List</h2>
 			<div>
 				<input
-					placeholder="Search Marvel Comics"
+					placeholder="Search todo"
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
 
 				{isSearching && <div>Searching ...</div>}
 
 				{results.map((result) => (
-					<div key={result.id}>
+          <div key={result.id}>
 						<h4>{result.title}</h4>
 						<img
 							src={`${result.thumbnail.path}/portrait_incredible.${result.thumbnail.extension}`}
-						/>
+              />
 					</div>
 				))}
+        <p></p>
 			</div>
 			<form className={styles.form} onSubmit={onSubmit}>
 				<input
@@ -134,6 +135,7 @@ export const JsonServerComponent = ({ Loader }) => {
 						<span>{id}</span>
 						{title}
 						<button
+							// key={id}
 							disabled={isUpdating}
 							className={styles.updateBtn}
 							onClick={requestUpdateTodo}
