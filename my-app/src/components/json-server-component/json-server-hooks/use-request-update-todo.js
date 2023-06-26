@@ -8,10 +8,10 @@ export const useRequestUpdateTodo = (
 ) => {
 	const [isUpdating, setIsUpdating] = useState(false)
 
-	const requestUpdateTodo = () => {
+	const requestUpdateTodo = (id) => {
 		setIsUpdating(true)
 
-		fetch(`http://localhost:8204/todos/4`, {
+		fetch(`http://localhost:8204/todos/${id}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
 			body: JSON.stringify({
@@ -34,5 +34,6 @@ export const useRequestUpdateTodo = (
 	return {
 		isUpdating,
 		requestUpdateTodo,
+    setIsUpdating,
 	}
 }

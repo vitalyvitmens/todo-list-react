@@ -3,10 +3,10 @@ import { useState } from 'react'
 export const useRequestDeleteTodo = (refreshTodos, setRefreshTodos) => {
 	const [isDeleting, setIsDeleting] = useState(false)
 
-	const requestDeleteTodo = () => {
+	const requestDeleteTodo = (id) => {
 		setIsDeleting(true)
 
-		fetch('http://localhost:8204/todos/5', {
+		fetch(`http://localhost:8204/todos/${id}`, {
 			method: 'DELETE',
 		})
 			.then((rawResponse) => rawResponse.json())

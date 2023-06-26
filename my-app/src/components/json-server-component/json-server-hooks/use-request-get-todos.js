@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 
-export const useRequestGetTodos = (refreshTodos) => {
+export const useRequestGetTodos = (refreshTodos, setTodosServer) => {
 	const [isLoadingJsonServerComponent, setIsLoadingJsonServerComponent] =
 		useState(false)
-	const [todosServer, setTodosServer] = useState([])
 
 	useEffect(() => {
 		setIsLoadingJsonServerComponent(true)
@@ -18,6 +17,5 @@ export const useRequestGetTodos = (refreshTodos) => {
 
 	return {
 		isLoadingJsonServerComponent,
-		todosServer,
 	}
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { TodoForm, TodoList } from './components'
 import {
 	useRequestAddTodo,
 	useRequestDeleteTodo,
@@ -18,10 +19,14 @@ import styles from './json-server-component.module.css'
 
 export const JsonServerComponent = ({ Loader }) => {
 	const [todo, setTodo] = useState('')
+	const [todosServer, setTodosServer] = useState([])
 	const [refreshTodos, setRefreshTodos] = useState(false)
+	const [editId, setEditId] = useState(false)
 
-	const { isLoadingJsonServerComponent, todosServer } =
-		useRequestGetTodos(refreshTodos)
+	const { isLoadingJsonServerComponent } = useRequestGetTodos(
+		refreshTodos,
+		setTodosServer
+	)
 
 	const { isCreating, requestAddTodo } = useRequestAddTodo(
 		refreshTodos,
@@ -30,7 +35,7 @@ export const JsonServerComponent = ({ Loader }) => {
 		setTodo
 	)
 
-	const { isUpdating, requestUpdateTodo } = useRequestUpdateTodo(
+	const { isUpdating, requestUpdateTodo, setIsUpdating } = useRequestUpdateTodo(
 		refreshTodos,
 		setRefreshTodos,
 		todo,
@@ -90,67 +95,65 @@ export const JsonServerComponent = ({ Loader }) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		console.log(e.target)
+
+		if (editId) {
+			const editTodo = todosServer.find((i) => i.id === editId)
+			const updatedTodos = todosServer.map((t) =>
+				t.id === editTodo.id
+					? (t = { id: t.id, todo })
+					: { id: t.id, todo: t.todo }
+			)
+			setTodosServer(updatedTodos)
+			setEditId(0)
+			setTodo('')
+			return
+		}
+
+		if (todo !== '') {
+			setTodosServer([{ id: `${todo}-${Date.now()}`, todo }, ...todosServer])
+			setTodo('')
+		}
 	}
 
 	return (
 		<div className={styles.container}>
 			<h3>2. JSON Server</h3>
 			<h2>My To-Do List</h2>
-			<div>
-				<input
-					placeholder="Search todo"
-					onChange={(e) => setSearchTerm(e.target.value)}
-				/>
+			<input
+				placeholder="Найти задачу"
+				onChange={(e) => setSearchTerm(e.target.value)}
+			/>
 
-				{isSearching && <div>Searching ...</div>}
+			{isSearching && <div>Поиск ...</div>}
 
-				{results.map((result) => (
-          <div key={result.id}>
-						<h4>{result.title}</h4>
-						<img
-							src={`${result.thumbnail.path}/portrait_incredible.${result.thumbnail.extension}`}
-              />
-					</div>
-				))}
-        <p></p>
-			</div>
-			<form className={styles.form} onSubmit={onSubmit}>
-				<input
-					type="text"
-					name="todo"
-					value={todo}
-					placeholder="New todo"
-					onChange={onTodoChange}
-				></input>
-				<button disabled={isCreating} onClick={requestAddTodo}>
-					Add
-				</button>
-			</form>
+			{results.map((result) => (
+				<div key={result.id}>
+					<h4>{result.title}</h4>
+					<img
+						src={`${result.thumbnail.path}/portrait_incredible.${result.thumbnail.extension}`}
+					/>
+				</div>
+			))}
+			<p></p>
+			<TodoForm
+				onSubmit={onSubmit}
+				todo={todo}
+				editId={editId}
+				setTodo={setTodo}
+				requestAddTodo={requestAddTodo}
+				isUpdating={isUpdating}
+			/>
 			{isLoadingJsonServerComponent ? (
 				<Loader />
 			) : (
-				todosServer.map(({ id, title }) => (
-					<ol onClick={onSubmit} key={id}>
-						<span>{id}</span>
-						{title}
-						<button
-							// key={id}
-							disabled={isUpdating}
-							className={styles.updateBtn}
-							onClick={requestUpdateTodo}
-						>
-							✎
-						</button>
-						<button
-							disabled={isDeleting}
-							className={styles.deleteBtn}
-							onClick={requestDeleteTodo}
-						>
-							X
-						</button>
-					</ol>
-				))
+				<TodoList
+					todo={todo}
+					todosServer={todosServer}
+					setTodo={setTodo}
+					requestUpdateTodo={requestUpdateTodo}
+					requestDeleteTodo={requestDeleteTodo}
+					setIsUpdating={setIsUpdating}
+				/>
 			)}
 		</div>
 	)

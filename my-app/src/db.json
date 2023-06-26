@@ -1,3 +1,29 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "title": "купи молоко",
+      "completed": false,
+      "id": 1
+    },
+    {
+      "title": "выгуляй Ричи",
+      "completed": false,
+      "id": 2
+    },
+    {
+      "title": "купи хлеб",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "title": "купи молоко",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "title": "поиграй в футбол",
+      "completed": false,
+      "id": 5
+    }
+  ]
 }
