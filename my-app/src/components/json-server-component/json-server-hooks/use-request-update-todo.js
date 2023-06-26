@@ -22,10 +22,6 @@ export const useRequestUpdateTodo = (
 			.then((rawResponse) => rawResponse.json())
 			.then((response) => {
 				setTodo('')
-				console.log(
-					`Задача: ${todo} с id: ${response.id} обновлена, ответ сервера:`,
-					response
-				)
 				setRefreshTodos(!refreshTodos)
 			})
 			.finally(() => setIsUpdating(false))
@@ -34,6 +30,6 @@ export const useRequestUpdateTodo = (
 	return {
 		isUpdating,
 		requestUpdateTodo,
-    setIsUpdating,
+		setIsUpdating,
 	}
 }

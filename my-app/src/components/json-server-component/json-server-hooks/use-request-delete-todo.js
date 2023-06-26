@@ -11,7 +11,6 @@ export const useRequestDeleteTodo = (refreshTodos, setRefreshTodos) => {
 		})
 			.then((rawResponse) => rawResponse.json())
 			.then((response) => {
-				console.log(`Задача удалена, ответ сервера:`, response)
 				setRefreshTodos(!refreshTodos)
 			})
 			.finally(() => setIsDeleting(false))

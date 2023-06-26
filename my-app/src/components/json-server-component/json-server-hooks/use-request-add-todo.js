@@ -23,7 +23,6 @@ export const useRequestAddTodo = (
 				.then((rawResponse) => rawResponse.json())
 				.then((response) => {
 					setTodo('')
-					console.log(`Добавлена задача ${todo}, ответ сервера:`, response)
 					setRefreshTodos(!refreshTodos)
 				})
 				.finally(() => setIsCreating(false))
