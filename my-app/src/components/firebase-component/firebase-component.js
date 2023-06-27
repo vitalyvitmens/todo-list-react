@@ -10,16 +10,13 @@ import styles from './firebase-component.module.css'
 
 export const FirebaseComponent = ({ Loader }) => {
 	const [todo, setTodo] = useState('')
-	const [todos, setTodos] = useState([])
+	const [todos, setTodos] = useState({})
 	const [refreshTodos, setRefreshTodos] = useState(false)
 	const [editId, setEditId] = useState(false)
 	const [sortTitle, setSortTitle] = useState(false)
 	const [search, setSearch] = useState('')
 
-	const { isLoadingFirebaseComponent } = useRequestGetTodos(
-		setTodos,
-		sortTitle
-	)
+	const { isLoadingFirebaseComponent } = useRequestGetTodos(setTodos, sortTitle)
 
 	const { isCreating, requestAddTodo } = useRequestAddTodo(
 		refreshTodos,
@@ -58,7 +55,7 @@ export const FirebaseComponent = ({ Loader }) => {
 		}
 
 		if (todo !== '') {
-			setTodos([{ id: `${todo}-${Date.now()}`, todo }, ...todos])
+			setTodos({ id: `${todo}-${Date.now()}`, todo }, ...todos)
 			setTodo('')
 		}
 	}

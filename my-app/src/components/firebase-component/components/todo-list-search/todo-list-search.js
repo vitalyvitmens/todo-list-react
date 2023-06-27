@@ -9,11 +9,11 @@ export const TodoListSearch = ({
 	setIsUpdating,
 	search,
 }) => {
-	return todos
+	return Object.entries(todos)
 		.filter((todo) => {
 			return search ? todo.title.includes(search) : todo
 		})
-		.map(({ id, title }) => (
+		.map(([id, { title }]) => (
 			<ol key={id}>
 				<span>{id}</span>
 				{title}

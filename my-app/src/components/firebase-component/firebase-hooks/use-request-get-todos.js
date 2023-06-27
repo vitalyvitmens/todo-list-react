@@ -4,14 +4,13 @@ import { db } from '../../../firebase'
 
 export const useRequestGetTodos = (setTodos) => {
 	const [isLoadingFirebaseComponent, setIsLoadingFirebaseComponent] =
-		useState(false)
+		useState(true)
 
 	useEffect(() => {
 		const todosDbRef = ref(db, 'todos')
 
 		return onValue(todosDbRef, (snapshot) => {
-			const loadedTodos = snapshot.val() || []
-
+			const loadedTodos = snapshot.val() || {}
 			setTodos(loadedTodos)
 			setIsLoadingFirebaseComponent(false)
 		})

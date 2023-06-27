@@ -8,7 +8,7 @@ export const TodoList = ({
 	setTodo,
 	setIsUpdating,
 }) => {
-	return todos.map(({ id, title }) => (
+	return Object.entries(todos).map(([id, { title }]) => (
 		<ol key={id}>
 			<span>{id}</span>
 			{title}
