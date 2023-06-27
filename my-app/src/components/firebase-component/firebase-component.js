@@ -69,7 +69,7 @@ export const FirebaseComponent = ({ Loader }) => {
 
 	return (
 		<div className={styles.container}>
-			<h3>2. JSON Server</h3>
+			<h3>3. Firebase</h3>
 			<h2>My To-Do List</h2>
 			<input
 				type="text"
