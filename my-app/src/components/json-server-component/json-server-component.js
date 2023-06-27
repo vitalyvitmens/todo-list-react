@@ -22,10 +22,12 @@ export const JsonServerComponent = ({ Loader }) => {
 	const [todosServer, setTodosServer] = useState([])
 	const [refreshTodos, setRefreshTodos] = useState(false)
 	const [editId, setEditId] = useState(false)
+	const [sortTitle, setSortTitle] = useState(false)
 
 	const { isLoadingJsonServerComponent } = useRequestGetTodos(
 		refreshTodos,
-		setTodosServer
+		setTodosServer,
+		sortTitle
 	)
 
 	const { isCreating, requestAddTodo } = useRequestAddTodo(
