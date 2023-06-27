@@ -145,7 +145,11 @@ export const JsonServerComponent = ({ Loader }) => {
 				isUpdating={isUpdating}
 			/>
 			<p></p>
-			<button className={styles.btnGreen} onClick={sortHandler}>
+			<button
+				className={styles.btnGreen}
+				onClick={sortHandler}
+				disabled={todosServer.length === 0}
+			>
 				{sortTitle
 					? 'Отфильтровать задачи по id'
 					: 'Отфильтровать задачи по алфавиту'}
