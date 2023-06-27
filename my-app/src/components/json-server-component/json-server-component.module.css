@@ -63,3 +63,19 @@ h2 {
 	background: #fff;
 	color: #f0ecec;
 }
+
+.btnGreen {
+	background-color: green;
+	color: white;
+	border-radius: 10px;
+	padding: 5px 10px;
+	margin-left: 5px 5px;
+}
+
+.btnGreen:hover {
+	opacity: 0.8;
+}
+
+.btnGreen:active {
+	opacity: 0.5;
+}

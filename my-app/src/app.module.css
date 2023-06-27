@@ -1,26 +1,26 @@
 .app {
 	text-align: left;
 	display: flex;
-  margin: auto;
+	margin: auto;
 	justify-content: space-around;
 }
 
 .container {
 	border: 1px solid black;
 	padding: 0 20px;
-  margin: 2px;
-  /* width: 300px; */
+	margin: 2px;
+	/* width: 300px; */
 }
 
 h3 {
-  text-align: center;
-  color: black;
-  margin: 10px;
-  padding: 10px;
+	text-align: center;
+	color: black;
+	margin: 10px;
+	padding: 10px;
 }
 
 ol {
-  font: 14px 'Trebuchet MS', 'Lucida Sans';
+	font: 14px 'Trebuchet MS', 'Lucida Sans';
 	position: relative;
 	padding: 0.4em 2em 0.4em 2em;
 	margin: 0.5em 0;

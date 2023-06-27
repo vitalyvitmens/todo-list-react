@@ -113,6 +113,9 @@ export const JsonServerComponent = ({ Loader }) => {
 		}
 	}
 
+	const sortHandler = () =>
+		sortTitle ? setSortTitle(false) : setSortTitle(true)
+
 	return (
 		<div className={styles.container}>
 			<h3>2. JSON Server</h3>
@@ -141,6 +144,12 @@ export const JsonServerComponent = ({ Loader }) => {
 				requestAddTodo={requestAddTodo}
 				isUpdating={isUpdating}
 			/>
+			<p></p>
+			<button className={styles.btnGreen} onClick={sortHandler}>
+				{sortTitle
+					? 'Отфильтровать задачи по id'
+					: 'Отфильтровать задачи по алфавиту'}
+			</button>
 			{isLoadingJsonServerComponent ? (
 				<Loader />
 			) : (

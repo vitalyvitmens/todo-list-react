@@ -19,7 +19,7 @@ export const useRequestGetTodos = (refreshTodos, setTodosServer, sortTitle) => {
 						setTodosServer(loadedTodo)
 					})
 					.finally(() => setIsLoadingJsonServerComponent(false))
-	}, [refreshTodos])
+	}, [refreshTodos, sortTitle])
 
 	return {
 		isLoadingJsonServerComponent,
