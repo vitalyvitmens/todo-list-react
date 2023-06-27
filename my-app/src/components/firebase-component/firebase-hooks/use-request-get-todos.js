@@ -1,25 +1,21 @@
 import { useState, useEffect } from 'react'
+import { ref, onValue } from 'firebase/database'
+import { db } from '../../../firebase'
 
-export const useRequestGetTodos = (refreshTodos, setTodosServer, sortTitle) => {
+export const useRequestGetTodos = (setTodos) => {
 	const [isLoadingFirebaseComponent, setIsLoadingFirebaseComponent] =
 		useState(false)
 
 	useEffect(() => {
-		setIsLoadingFirebaseComponent(true)
-		sortTitle
-			? fetch('http://localhost:8204/todos?_sort=title')
-					.then((loadedData) => loadedData.json())
-					.then((loadedTodo) => {
-						setTodosServer(loadedTodo)
-					})
-					.finally(() => setIsLoadingFirebaseComponent(false))
-			: fetch('http://localhost:8204/todos')
-					.then((loadedData) => loadedData.json())
-					.then((loadedTodo) => {
-						setTodosServer(loadedTodo)
-					})
-					.finally(() => setIsLoadingFirebaseComponent(false))
-	}, [refreshTodos, sortTitle])
+		const todosDbRef = ref(db, 'todos')
+
+		return onValue(todosDbRef, (snapshot) => {
+			const loadedTodos = snapshot.val() || []
+
+			setTodos(loadedTodos)
+			setIsLoadingFirebaseComponent(false)
+		})
+	}, [])
 
 	return {
 		isLoadingFirebaseComponent,

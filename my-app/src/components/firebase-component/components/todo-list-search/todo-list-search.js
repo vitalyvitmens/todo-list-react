@@ -1,7 +1,7 @@
 import styles from './todo-list-search.module.css'
 
 export const TodoListSearch = ({
-	todosServer,
+	todos,
 	requestUpdateTodo,
 	requestDeleteTodo,
 	todo,
@@ -9,7 +9,7 @@ export const TodoListSearch = ({
 	setIsUpdating,
 	search,
 }) => {
-	return todosServer
+	return todos
 		.filter((todo) => {
 			return search ? todo.title.includes(search) : todo
 		})

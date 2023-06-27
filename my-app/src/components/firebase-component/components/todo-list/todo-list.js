@@ -1,14 +1,14 @@
 import styles from './todo-list.module.css'
 
 export const TodoList = ({
-	todosServer,
+	todos,
 	requestUpdateTodo,
 	requestDeleteTodo,
 	todo,
 	setTodo,
 	setIsUpdating,
 }) => {
-	return todosServer.map(({ id, title }) => (
+	return todos.map(({ id, title }) => (
 		<ol key={id}>
 			<span>{id}</span>
 			{title}

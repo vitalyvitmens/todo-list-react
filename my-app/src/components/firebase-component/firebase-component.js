@@ -10,15 +10,14 @@ import styles from './firebase-component.module.css'
 
 export const FirebaseComponent = ({ Loader }) => {
 	const [todo, setTodo] = useState('')
-	const [todosServer, setTodosServer] = useState([])
+	const [todos, setTodos] = useState([])
 	const [refreshTodos, setRefreshTodos] = useState(false)
 	const [editId, setEditId] = useState(false)
 	const [sortTitle, setSortTitle] = useState(false)
 	const [search, setSearch] = useState('')
 
 	const { isLoadingFirebaseComponent } = useRequestGetTodos(
-		refreshTodos,
-		setTodosServer,
+		setTodos,
 		sortTitle
 	)
 
@@ -46,20 +45,20 @@ export const FirebaseComponent = ({ Loader }) => {
 		e.preventDefault()
 
 		if (editId) {
-			const editTodo = todosServer.find((i) => i.id === editId)
-			const updatedTodos = todosServer.map((t) =>
+			const editTodo = todos.find((i) => i.id === editId)
+			const updatedTodos = todos.map((t) =>
 				t.id === editTodo.id
 					? (t = { id: t.id, todo })
 					: { id: t.id, todo: t.todo }
 			)
-			setTodosServer(updatedTodos)
+			setTodos(updatedTodos)
 			setEditId(0)
 			setTodo('')
 			return
 		}
 
 		if (todo !== '') {
-			setTodosServer([{ id: `${todo}-${Date.now()}`, todo }, ...todosServer])
+			setTodos([{ id: `${todo}-${Date.now()}`, todo }, ...todos])
 			setTodo('')
 		}
 	}
@@ -91,7 +90,7 @@ export const FirebaseComponent = ({ Loader }) => {
 			<button
 				className={styles.btnGreen}
 				onClick={sortHandler}
-				disabled={todosServer.length === 0}
+				// disabled={todos.length === 0}
 			>
 				{sortTitle
 					? 'Отфильтровать задачи по id'
@@ -102,7 +101,7 @@ export const FirebaseComponent = ({ Loader }) => {
 			) : search ? (
 				<TodoListSearch
 					todo={todo}
-					todosServer={todosServer}
+					todos={todos}
 					setTodo={setTodo}
 					requestUpdateTodo={requestUpdateTodo}
 					requestDeleteTodo={requestDeleteTodo}
@@ -112,7 +111,7 @@ export const FirebaseComponent = ({ Loader }) => {
 			) : (
 				<TodoList
 					todo={todo}
-					todosServer={todosServer}
+					todos={todos}
 					setTodo={setTodo}
 					requestUpdateTodo={requestUpdateTodo}
 					requestDeleteTodo={requestDeleteTodo}
