@@ -1,20 +1,3 @@
-.container {
-	border: 1px solid black;
-	padding: 0 20px;
-	margin: 2px;
-}
-
-h2 {
-	color: rgb(25, 129, 124);
-	font-size: 1.75rem;
-	text-align: center;
-	margin-top: 0 10px;
-}
-
-.form {
-	display: flex;
-}
-
 .deleteBtn {
 	position: absolute;
 	right: -1em;
@@ -39,12 +22,13 @@ h2 {
 	background: #fff;
 	color: #f0ecec;
 }
-.updateBtn {
+
+.updateBtnYellow {
 	position: absolute;
 	right: 1.25em;
 	top: 50%;
 	margin-top: -1em;
-	background: rgb(187, 187, 218);
+	background: yellow;
 	height: 2em;
 	width: 2em;
 	color: blue;
@@ -55,33 +39,34 @@ h2 {
 	border-radius: 2em;
 }
 
-.updateBtn:hover {
-	background: rgb(158, 36, 36);
-}
-
-.updateBtn:active {
-	background: #fff;
-	color: #f0ecec;
-}
-
-.btnGreen {
-	background-color: green;
-	color: white;
-	border-radius: 10px;
-	padding: 5px 10px;
-	margin-left: 5px 5px;
-}
-
-.btnGreen:hover {
+.updateBtnYellow:hover {
 	opacity: 0.8;
 }
 
-.btnGreen:active {
+.updateBtnYellow:active {
 	opacity: 0.5;
 }
 
-.btnGreen:disabled {
-	background-color: grey;
-	color: white;
+.updateBtnGreen {
+	position: absolute;
+	right: 1.25em;
+	top: 50%;
+	margin-top: -1em;
+	background: green;
+	height: 2em;
+	width: 2em;
+	color: blue;
+	border: 0.3em solid #ffffff;
+	text-align: center;
+	font-size: 1rem;
+	font-weight: 600;
+	border-radius: 2em;
+}
+
+.updateBtnGreen:hover {
+	opacity: 0.8;
+}
+
+.updateBtnGreen:active {
 	opacity: 0.5;
 }
