@@ -3,11 +3,11 @@
 }
 
 .btnBlue {
-  background-color: blue;
+	background-color: blue;
 	color: white;
-  border-radius: 10px;
-  padding: 5px 10px;
-  margin-left: 10px;
+	border-radius: 10px;
+	padding: 5px 10px;
+	margin-left: 10px;
 }
 
 .btnBlue:disabled {

@@ -9,11 +9,7 @@ import {
 import styles from './json-server-component.module.css'
 
 //! JSON Server
-// https://www.npmjs.com/package/json-server
-// 1). npm install -g json-server
-// 2). Create a db.json file with some data
-// 3). cd my-app
-//! 4). json-server --watch src/db.json --port 8204 --delay 2000 (запуск json-server с задержкой подгрузки данных в 2 секунды)
+// json-server --watch src/db.json --port 8204
 
 export const JsonServerComponent = ({ Loader }) => {
 	const [todo, setTodo] = useState('')
@@ -85,9 +81,7 @@ export const JsonServerComponent = ({ Loader }) => {
 				onChange={({ target }) => setSearch(target.value)}
 				className="input-field"
 			/>
-
 			<p></p>
-
 			<TodoForm
 				onSubmit={onSubmit}
 				todo={todo}
