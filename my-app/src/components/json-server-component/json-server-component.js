@@ -89,10 +89,6 @@ export const JsonServerComponent = ({ Loader }) => {
 		[debouncedSearchTerm]
 	)
 
-	const onTodoChange = ({ target }) => {
-		setTodo(target.value)
-	}
-
 	const onSubmit = (e) => {
 		e.preventDefault()
 

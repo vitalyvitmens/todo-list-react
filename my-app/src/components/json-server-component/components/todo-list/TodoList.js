@@ -8,18 +8,18 @@ export const TodoList = ({
 	setTodo,
 	setIsUpdating,
 }) => {
-	return todosServer.map((t) => (
-		<ol key={t.id}>
-			<span>{t.id}</span>
-			{t.title}
+	return todosServer.map(({ id, title }) => (
+		<ol key={id}>
+			<span>{id}</span>
+			{title}
 			<button
 				className={!todo ? styles.updateBtnYellow : styles.updateBtnGreen}
 				onClick={() => {
 					if (todo === '') {
 						setIsUpdating(true)
-						setTodo(t.title)
+						setTodo(title)
 					} else {
-						requestUpdateTodo(t.id)
+						requestUpdateTodo(id)
 						setTodo('')
 					}
 				}}
@@ -28,7 +28,7 @@ export const TodoList = ({
 			</button>
 			<button
 				className={styles.deleteBtn}
-				onClick={() => requestDeleteTodo(t.id)}
+				onClick={() => requestDeleteTodo(id)}
 			>
 				X
 			</button>

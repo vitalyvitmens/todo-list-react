@@ -17,13 +17,28 @@
     },
     {
       "title": "купи молоко",
-      "completed": false,
+      "completed": true,
       "id": 4
     },
     {
       "title": "поиграй в футбол",
       "completed": false,
       "id": 5
+    },
+    {
+      "title": "арбуз",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "title": "банан",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "title": "яблоко",
+      "completed": false,
+      "id": 8
     }
   ]
 }
