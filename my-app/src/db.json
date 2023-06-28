@@ -39,11 +39,6 @@
       "title": "яблоко",
       "completed": false,
       "id": 8
-    },
-    {
-      "title": "сходи на тренировку",
-      "completed": false,
-      "id": 9
     }
   ]
 }

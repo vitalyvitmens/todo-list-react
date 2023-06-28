@@ -15,7 +15,7 @@ export const TodoListSearch = ({
 		})
 		.map(([id, { title }]) => (
 			<ol key={id}>
-				<span>{id}</span>
+				{/* <span>{id}</span> */}
 				{title}
 				<button
 					className={!todo ? styles.updateBtnYellow : styles.updateBtnGreen}

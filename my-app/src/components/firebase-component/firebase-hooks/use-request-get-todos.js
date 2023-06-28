@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ref, onValue } from 'firebase/database'
 import { db } from '../../../firebase'
 
-export const useRequestGetTodos = (setTodos) => {
+export const useRequestGetTodos = (todo, setTodos) => {
 	const [isLoadingFirebaseComponent, setIsLoadingFirebaseComponent] =
 		useState(true)
 
@@ -11,10 +11,11 @@ export const useRequestGetTodos = (setTodos) => {
 
 		return onValue(todosDbRef, (snapshot) => {
 			const loadedTodos = snapshot.val() || {}
+			console.log(loadedTodos)
 			setTodos(loadedTodos)
 			setIsLoadingFirebaseComponent(false)
 		})
-	}, [])
+	}, [todo])
 
 	return {
 		isLoadingFirebaseComponent,

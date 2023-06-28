@@ -1,0 +1,40 @@
+{
+	"todos": {
+		"1": {
+			"title": "купи молоко",
+			"completed": false
+		},
+		"2": {
+			"title": "выгуляй Ричи",
+			"completed": false
+		},
+		"3": {
+			"title": "купи хлеб",
+			"completed": false
+		},
+		"4": {
+			"title": "купи молоко",
+			"completed": true
+		},
+		"5": {
+			"title": "поиграй в футбол",
+			"completed": false
+		},
+		"6": {
+			"title": "арбуз",
+			"completed": false
+		},
+		"7": {
+			"title": "банан",
+			"completed": false
+		},
+		"8": {
+			"title": "яблоко",
+			"completed": false
+		},
+		"9": {
+			"title": "сходи на тренировку",
+			"completed": false
+		}
+	}
+}

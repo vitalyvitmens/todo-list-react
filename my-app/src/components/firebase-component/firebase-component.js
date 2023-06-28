@@ -16,14 +16,9 @@ export const FirebaseComponent = ({ Loader }) => {
 	const [sortTitle, setSortTitle] = useState(false)
 	const [search, setSearch] = useState('')
 
-	const { isLoadingFirebaseComponent } = useRequestGetTodos(setTodos, sortTitle)
+	const { isLoadingFirebaseComponent } = useRequestGetTodos(todo, setTodos, sortTitle)
 
-	const { isCreating, requestAddTodo } = useRequestAddTodo(
-		refreshTodos,
-		setRefreshTodos,
-		todo,
-		setTodo
-	)
+	const { isCreating, requestAddTodo } = useRequestAddTodo(todo, setTodo)
 
 	const { isUpdating, requestUpdateTodo, setIsUpdating } = useRequestUpdateTodo(
 		refreshTodos,
@@ -55,7 +50,7 @@ export const FirebaseComponent = ({ Loader }) => {
 		}
 
 		if (todo !== '') {
-			setTodos({ id: `${todo}-${Date.now()}`, todo }, ...todos)
+			setTodos(Object.entries([{ todo, ...todos }]))
 			setTodo('')
 		}
 	}

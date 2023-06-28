@@ -10,7 +10,7 @@ export const TodoList = ({
 }) => {
 	return Object.entries(todos).map(([id, { title }]) => (
 		<ol key={id}>
-			<span>{id}</span>
+			<span>😎</span>
 			{title}
 			<button
 				className={!todo ? styles.updateBtnYellow : styles.updateBtnGreen}
