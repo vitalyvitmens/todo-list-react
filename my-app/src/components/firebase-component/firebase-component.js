@@ -58,6 +58,9 @@ export const FirebaseComponent = ({ Loader }) => {
 	const sortHandler = () =>
 		sortTitle ? setSortTitle(false) : setSortTitle(true)
 
+	const completedHandler = () =>
+		sortTitle ? setSortTitle(false) : setSortTitle(true)
+
 	return (
 		<div className={styles.container}>
 			<h3>3. Firebase</h3>
