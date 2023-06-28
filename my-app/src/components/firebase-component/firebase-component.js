@@ -4,6 +4,7 @@ import {
 	useRequestDeleteTodo,
 	useRequestGetTodos,
 	useRequestUpdateTodo,
+	useRequestToggleCompletedTodo,
 } from './firebase-hooks'
 import { TodoForm, TodoList, TodoListSearch } from './components'
 import styles from './firebase-component.module.css'
@@ -15,8 +16,13 @@ export const FirebaseComponent = ({ Loader }) => {
 	const [editId, setEditId] = useState(false)
 	const [sortTitle, setSortTitle] = useState(false)
 	const [search, setSearch] = useState('')
+	const [completed, setСompleted] = useState(false)
 
-	const { isLoadingFirebaseComponent } = useRequestGetTodos(todo, setTodos, sortTitle)
+	const { isLoadingFirebaseComponent } = useRequestGetTodos(
+		todo,
+		setTodos,
+		sortTitle
+	)
 
 	const { isCreating, requestAddTodo } = useRequestAddTodo(todo, setTodo)
 
@@ -25,6 +31,13 @@ export const FirebaseComponent = ({ Loader }) => {
 		setRefreshTodos,
 		todo,
 		setTodo
+	)
+
+	const { requestUpdateCompletedTodo } = useRequestToggleCompletedTodo(
+		refreshTodos,
+		setRefreshTodos,
+		completed,
+		setСompleted
 	)
 
 	const { isDeleting, requestDeleteTodo } = useRequestDeleteTodo(
@@ -58,8 +71,8 @@ export const FirebaseComponent = ({ Loader }) => {
 	const sortHandler = () =>
 		sortTitle ? setSortTitle(false) : setSortTitle(true)
 
-	const completedHandler = () =>
-		sortTitle ? setSortTitle(false) : setSortTitle(true)
+	const toggleCompletedHandler = () =>
+		completed ? setСompleted(false) : setСompleted(true)
 
 	return (
 		<div className={styles.container}>
@@ -82,11 +95,7 @@ export const FirebaseComponent = ({ Loader }) => {
 				isUpdating={isUpdating}
 			/>
 			<p></p>
-			<button
-				className={styles.btnGreen}
-				onClick={sortHandler}
-				// disabled={todos.length === 0}
-			>
+			<button className={styles.btnGreen} onClick={sortHandler}>
 				{sortTitle
 					? 'Отфильтровать задачи по id'
 					: 'Отфильтровать задачи по алфавиту'}
@@ -111,6 +120,8 @@ export const FirebaseComponent = ({ Loader }) => {
 					requestUpdateTodo={requestUpdateTodo}
 					requestDeleteTodo={requestDeleteTodo}
 					setIsUpdating={setIsUpdating}
+					requestUpdateCompletedTodo={requestUpdateCompletedTodo}
+					toggleCompletedHandler={toggleCompletedHandler}
 				/>
 			)}
 		</div>

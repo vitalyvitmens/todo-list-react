@@ -7,11 +7,21 @@ export const TodoList = ({
 	todo,
 	setTodo,
 	setIsUpdating,
+	toggleCompletedHandler,
+	requestUpdateCompletedTodo,
 }) => {
-	return Object.entries(todos).map(([id, { title }]) => (
+	return Object.entries(todos).map(([id, { title, completed }]) => (
 		<ol key={id}>
 			<span>😎</span>
-			{title}
+			<div
+				className={completed ? styles.todoLineThrough : styles.todo}
+				onClick={() => {
+          toggleCompletedHandler()
+					requestUpdateCompletedTodo(id)
+				}}
+			>
+				{title}
+			</div>
 			<button
 				className={!todo ? styles.updateBtnYellow : styles.updateBtnGreen}
 				onClick={() => {
