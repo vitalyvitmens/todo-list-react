@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { ref, set } from 'firebase/database'
+import { db } from '../../../firebase'
 
 export const useRequestUpdateTodo = (
 	refreshTodos,
@@ -11,15 +13,12 @@ export const useRequestUpdateTodo = (
 	const requestUpdateTodo = (id) => {
 		setIsUpdating(true)
 
-		fetch(`http://localhost:8204/todos/${id}`, {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({
-				title: todo,
-				completed: false,
-			}),
+		const todoUpdateDbRef = ref(db, `todos/${id}`)
+
+		set(todoUpdateDbRef, {
+			title: todo,
+			completed: false,
 		})
-			.then((rawResponse) => rawResponse.json())
 			.then((response) => {
 				setTodo('')
 				setRefreshTodos(!refreshTodos)

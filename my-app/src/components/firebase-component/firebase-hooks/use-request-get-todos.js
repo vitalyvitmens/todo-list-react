@@ -11,7 +11,7 @@ export const useRequestGetTodos = (todo, setTodos) => {
 
 		return onValue(todosDbRef, (snapshot) => {
 			const loadedTodos = snapshot.val() || {}
-			console.log(loadedTodos)
+
 			setTodos(loadedTodos)
 			setIsLoadingFirebaseComponent(false)
 		})

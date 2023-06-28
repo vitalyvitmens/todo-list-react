@@ -16,7 +16,7 @@ export const TodoForm = ({
 				onChange={(e) => setTodo(e.target.value)}
 			/>
 			<button
-				disabled={isUpdating}
+				disabled={isUpdating || todo === ''}
 				className={styles.btnBlue}
 				type="submit"
 				onClick={requestAddTodo}
