@@ -11,6 +11,7 @@ export const TodoForm = ({
 		<form className={styles.form} onSubmit={onSubmit}>
 			<input
 				type="text"
+        name="todo-input"
 				value={todo}
 				placeholder="Новая задача"
 				onChange={(e) => setTodo(e.target.value)}

@@ -12,6 +12,7 @@ export const TodoForm = ({
 			<input
 				type="text"
 				value={todo}
+        name="todo-input"
 				placeholder="Новая задача"
 				onChange={(e) => setTodo(e.target.value)}
 			/>

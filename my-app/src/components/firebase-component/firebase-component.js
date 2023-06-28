@@ -24,7 +24,7 @@ export const FirebaseComponent = ({ Loader }) => {
 		sortTitle
 	)
 
-	const { isCreating, requestAddTodo } = useRequestAddTodo(todo, setTodo)
+	const { requestAddTodo } = useRequestAddTodo(todo, setTodo)
 
 	const { isUpdating, requestUpdateTodo, setIsUpdating } = useRequestUpdateTodo(
 		refreshTodos,
@@ -40,7 +40,7 @@ export const FirebaseComponent = ({ Loader }) => {
 		setСompleted
 	)
 
-	const { isDeleting, requestDeleteTodo } = useRequestDeleteTodo(
+	const { requestDeleteTodo } = useRequestDeleteTodo(
 		refreshTodos,
 		setRefreshTodos,
 		todo
@@ -81,6 +81,7 @@ export const FirebaseComponent = ({ Loader }) => {
 			<input
 				type="text"
 				value={search}
+        name="search-todo"
 				placeholder="Найти задачу..."
 				onChange={({ target }) => setSearch(target.value)}
 				className="input-field"

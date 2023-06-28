@@ -15,7 +15,7 @@ export const useRequestGetTodos = (todo, setTodos) => {
 			setTodos(loadedTodos)
 			setIsLoadingFirebaseComponent(false)
 		})
-	}, [todo])
+	}, [todo, setTodos])
 
 	return {
 		isLoadingFirebaseComponent,

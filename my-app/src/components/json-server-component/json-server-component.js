@@ -25,7 +25,7 @@ export const JsonServerComponent = ({ Loader }) => {
 		sortTitle
 	)
 
-	const { isCreating, requestAddTodo } = useRequestAddTodo(
+	const { requestAddTodo } = useRequestAddTodo(
 		refreshTodos,
 		setRefreshTodos,
 		todo,
@@ -39,7 +39,7 @@ export const JsonServerComponent = ({ Loader }) => {
 		setTodo
 	)
 
-	const { isDeleting, requestDeleteTodo } = useRequestDeleteTodo(
+	const { requestDeleteTodo } = useRequestDeleteTodo(
 		refreshTodos,
 		setRefreshTodos,
 		todo
@@ -77,6 +77,7 @@ export const JsonServerComponent = ({ Loader }) => {
 			<input
 				type="text"
 				value={search}
+        name="search-todo"
 				placeholder="Найти задачу..."
 				onChange={({ target }) => setSearch(target.value)}
 				className="input-field"
