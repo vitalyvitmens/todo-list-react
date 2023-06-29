@@ -10,7 +10,7 @@ export const TodoList = ({
 	toggleCompletedHandler,
 	requestUpdateCompletedTodo,
 }) => {
-	return Object.entries(todos).map(([id, { title, completed }]) => (
+	return Object.entries(todos).map(([ id, { title, completed }]) => (
 		<ol key={id}>
 			<span>😎</span>
 			<div

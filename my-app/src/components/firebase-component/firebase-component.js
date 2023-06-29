@@ -6,7 +6,7 @@ import {
 	useRequestUpdateTodo,
 	useRequestToggleCompletedTodo,
 } from './firebase-hooks'
-import { TodoForm, TodoList, TodoListSearch } from './components'
+import { TodoForm, TodoList, TodoListSearch, TodoListSort } from './components'
 import styles from './firebase-component.module.css'
 
 export const FirebaseComponent = ({ Loader }) => {
@@ -18,11 +18,7 @@ export const FirebaseComponent = ({ Loader }) => {
 	const [search, setSearch] = useState('')
 	const [completed, setСompleted] = useState(false)
 
-	const { isLoadingFirebaseComponent } = useRequestGetTodos(
-		todo,
-		setTodos,
-		sortTitle
-	)
+	const { isLoadingFirebaseComponent } = useRequestGetTodos(todo, setTodos)
 
 	const { requestAddTodo } = useRequestAddTodo(todo, setTodo)
 
@@ -81,7 +77,7 @@ export const FirebaseComponent = ({ Loader }) => {
 			<input
 				type="text"
 				value={search}
-        name="search-todo"
+				name="search-todo"
 				placeholder="Найти задачу..."
 				onChange={({ target }) => setSearch(target.value)}
 				className="input-field"
@@ -96,7 +92,11 @@ export const FirebaseComponent = ({ Loader }) => {
 				isUpdating={isUpdating}
 			/>
 			<p></p>
-			<button className={styles.btnGreen} onClick={sortHandler}>
+			<button
+				className={styles.btnGreen}
+				onClick={sortHandler}
+				disabled={todos.length === 0}
+			>
 				{sortTitle
 					? 'Отфильтровать задачи по id'
 					: 'Отфильтровать задачи по алфавиту'}

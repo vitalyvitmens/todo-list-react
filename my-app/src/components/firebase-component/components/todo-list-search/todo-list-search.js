@@ -9,13 +9,13 @@ export const TodoListSearch = ({
 	setIsUpdating,
 	search,
 }) => {
-	return Object.entries(todos)
+	return todos
 		.filter((todo) => {
 			return search ? todo.title.includes(search) : todo
 		})
-		.map(([id, { title }]) => (
-			<ol key={id}>
-				{/* <span>{id}</span> */}
+		.map(({ id, title }) => (
+			<ol key={title}>
+				<span>😎</span>
 				{title}
 				<button
 					className={!todo ? styles.updateBtnYellow : styles.updateBtnGreen}

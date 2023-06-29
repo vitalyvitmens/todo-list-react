@@ -1,7 +1,7 @@
-import styles from './todo-list-search.module.css'
+import styles from './todo-list-sort.module.css'
 
-export const TodoListSearch = ({
-	todosServer,
+export const TodoListSort = ({
+	todos,
 	requestUpdateTodo,
 	requestDeleteTodo,
 	todo,
@@ -9,13 +9,13 @@ export const TodoListSearch = ({
 	setIsUpdating,
 	search,
 }) => {
-	return todosServer
+	return todos
 		.filter((todo) => {
 			return search ? todo.title.includes(search) : todo
 		})
 		.map(({ id, title }) => (
-			<ol key={id}>
-			<span>😎</span>
+			<ol key={title}>
+				<span>😎</span>
 				{title}
 				<button
 					className={!todo ? styles.updateBtnYellow : styles.updateBtnGreen}
