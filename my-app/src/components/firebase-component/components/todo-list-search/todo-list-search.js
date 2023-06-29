@@ -1,11 +1,11 @@
 import styles from './todo-list-search.module.css'
 
 export const TodoListSearch = ({
+	todo,
 	todos,
+	setTodo,
 	requestUpdateTodo,
 	requestDeleteTodo,
-	todo,
-	setTodo,
 	setIsUpdating,
 	search,
 }) => {

@@ -1,22 +1,22 @@
 import styles from './todo-list.module.css'
 
 export const TodoList = ({
+	todo,
 	todos,
+	setTodo,
 	requestUpdateTodo,
 	requestDeleteTodo,
-	todo,
-	setTodo,
 	setIsUpdating,
 	toggleCompletedHandler,
 	requestUpdateCompletedTodo,
 }) => {
-	return Object.entries(todos).map(([ id, { title, completed }]) => (
+	return Object.entries(todos).map(([id, { title, completed }]) => (
 		<ol key={id}>
 			<span>😎</span>
 			<div
 				className={completed ? styles.todoLineThrough : styles.todo}
 				onClick={() => {
-          toggleCompletedHandler()
+					toggleCompletedHandler()
 					requestUpdateCompletedTodo(id)
 				}}
 			>

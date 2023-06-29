@@ -17,7 +17,6 @@ export const useRequestGetTodos = (refreshTodos, setTodosServer, sortTitle) => {
 					.then((loadedData) => loadedData.json())
 					.then((loadedTodo) => {
 						setTodosServer(loadedTodo)
-
 					})
 					.finally(() => setIsLoadingJsonServerComponent(false))
 	}, [refreshTodos, sortTitle, setTodosServer])

@@ -1,11 +1,11 @@
 import styles from './todo-list-sort.module.css'
 
 export const TodoListSort = ({
+	todo,
 	todos,
+	setTodo,
 	requestUpdateTodo,
 	requestDeleteTodo,
-	todo,
-	setTodo,
 	setIsUpdating,
 	search,
 }) => {
