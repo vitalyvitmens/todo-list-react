@@ -113,6 +113,16 @@ export const FirebaseComponent = ({ Loader }) => {
 					setIsUpdating={setIsUpdating}
 					search={search}
 				/>
+			) : sortTitle ? (
+				<TodoListSort
+					todo={todo}
+					todos={todos}
+					setTodo={setTodo}
+					requestUpdateTodo={requestUpdateTodo}
+					requestDeleteTodo={requestDeleteTodo}
+					setIsUpdating={setIsUpdating}
+					search={search}
+				/>
 			) : (
 				<TodoList
 					todo={todo}

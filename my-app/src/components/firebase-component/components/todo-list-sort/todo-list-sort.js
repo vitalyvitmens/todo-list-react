@@ -13,6 +13,7 @@ export const TodoListSort = ({
 		.filter((todo) => {
 			return search ? todo.title.includes(search) : todo
 		})
+		.sort((a, b) => (a['title'] > b['title'] ? 1 : -1))
 		.map(({ id, title }) => (
 			<ol key={title}>
 				<span>😎</span>
