@@ -13,10 +13,12 @@ export const TodoListSearch = ({
 		.filter((todo) => {
 			return search ? todo.title.includes(search) : todo
 		})
-		.map(({ id, title }) => (
+		.map(({ id, title, completed }) => (
 			<ol key={title}>
 				<span>😎</span>
-				{title}
+				<div className={completed ? styles.todoLineThrough : styles.todo}>
+					{title}
+				</div>
 				<button
 					className={!todo ? styles.updateBtnYellow : styles.updateBtnGreen}
 					onClick={() => {

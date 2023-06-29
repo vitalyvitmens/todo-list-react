@@ -1,3 +1,11 @@
+.todo {
+	text-decoration: none;
+}
+
+.todoLineThrough {
+	text-decoration: line-through;
+}
+
 .form {
 	display: flex;
 }

@@ -14,10 +14,12 @@ export const TodoListSort = ({
 			return search ? todo.title.includes(search) : todo
 		})
 		.sort((a, b) => (a['title'] > b['title'] ? 1 : -1))
-		.map(({ id, title }) => (
+		.map(({ id, title, completed }) => (
 			<ol key={title}>
 				<span>😎</span>
-				{title}
+				<div className={completed ? styles.todoLineThrough : styles.todo}>
+					{title}
+				</div>
 				<button
 					className={!todo ? styles.updateBtnYellow : styles.updateBtnGreen}
 					onClick={() => {
