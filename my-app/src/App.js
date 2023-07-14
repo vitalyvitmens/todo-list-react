@@ -1,17 +1,23 @@
+import { useEffect, useState } from 'react'
+import { Todo } from './components'
 import styles from './app.module.css'
-import {
-	Loader,
-	JsonPlaceholderComponent,
-	JsonServerComponent,
-	FirebaseComponent,
-} from './components'
 
 export const App = () => {
+	const [todos, setTodos] = useState([])
+
+	useEffect(() => {
+		fetch('https://jsonplaceholder.typicode.com/todos')
+			.then((todosData) => todosData.json())
+			.then((loadedTodos) => setTodos(loadedTodos))
+	}, [])
+
 	return (
 		<div className={styles.app}>
-			<JsonPlaceholderComponent Loader={Loader} />
-			<JsonServerComponent Loader={Loader} />
-			<FirebaseComponent Loader={Loader} />
+			<div>
+				{todos.map(({ id, title, completed }) => (
+					<Todo key={id} title={title} completed={completed} />
+				))}
+			</div>
 		</div>
 	)
 }
