@@ -2,7 +2,7 @@
   "todos": [
     {
       "title": "купи молоко",
-      "completed": false,
+      "completed": true,
       "id": 1
     },
     {
@@ -29,6 +29,16 @@
       "title": "арбуз",
       "completed": true,
       "id": 6
+    },
+    {
+      "title": "яблоко",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "title": "банан",
+      "completed": true,
+      "id": 8
     }
   ]
 }

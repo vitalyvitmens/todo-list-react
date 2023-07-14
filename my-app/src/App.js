@@ -1,18 +1,41 @@
 import { useEffect, useState } from 'react'
 import { Todo, ControlPanel } from './components'
-import { readTodos, updateTodo, deleteTodo } from './api'
-import { findTodo, removeTodoInTodos, setTodoInTodos } from './utils'
+import { createTodo, readTodos, updateTodo, deleteTodo } from './api'
+import {
+	addTodoInTodos,
+	findTodo,
+	removeTodoInTodos,
+	setTodoInTodos,
+} from './utils'
+import { NEW_TODO_ID } from './constants'
 import styles from './app.module.css'
 
 export const App = () => {
 	const [todos, setTodos] = useState([])
 
-	const onTodoSave = (id) => {
-		const { title } = findTodo(todos, id) || {}
+	const onTodoAdd = () => {
+		setTodos(addTodoInTodos(todos))
+	}
 
-		updateTodo({ id, title }).then(() => {
-			setTodos(setTodoInTodos(todos, { id, isEditing: false }))
-		})
+	const onTodoSave = (todoId) => {
+		const { title, completed } = findTodo(todos, todoId) || {}
+
+		if (todoId === NEW_TODO_ID) {
+			createTodo({ title, completed }).then((todo) => {
+				let updatedTodos = setTodoInTodos(todos, {
+					id: NEW_TODO_ID,
+					isEditing: false,
+				})
+				updatedTodos = removeTodoInTodos(updatedTodos, NEW_TODO_ID)
+				updatedTodos = addTodoInTodos(updatedTodos, todo)
+
+				setTodos(updatedTodos)
+			})
+		} else {
+			updateTodo({ id: todoId, title }).then(() => {
+				setTodos(setTodoInTodos(todos, { id: todoId, isEditing: false }))
+			})
+		}
 	}
 
 	const onTodoEdit = (id) => {
@@ -34,12 +57,12 @@ export const App = () => {
 	}
 
 	useEffect(() => {
-		readTodos().then((loadedTodos) => setTodos(loadedTodos))
+		readTodos().then((loadedTodos) => setTodos(loadedTodos.reverse()))
 	}, [])
 
 	return (
 		<div className={styles.app}>
-			<ControlPanel />
+			<ControlPanel onTodoAdd={onTodoAdd} />
 			<div>
 				{todos.map(({ id, title, completed, isEditing = false }) => (
 					<Todo

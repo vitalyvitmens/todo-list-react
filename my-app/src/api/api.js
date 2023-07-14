@@ -1,13 +1,22 @@
-export const fetchServer = (method, { id, ...payload } = {}) => {
-	let url = 'http://localhost:8204/todos'
+import { HTTP_METHOD } from '../constants'
+
+export const fetchServer = (method, { id, ...payload } = {}, params = '') => {
+	let url = `http://localhost:8204/todos`
 	let options = {
 		method,
 		headers: { 'Content-Type': 'application/json' },
 	}
 
-	if (id !== undefined) {
-		url += `/${id}`
-		options.body = JSON.stringify(payload)
+	if (method === HTTP_METHOD.GET) {
+		url += ''
+	} else {
+		if (method !== HTTP_METHOD.POST) {
+			url += `/${id}`
+		}
+
+		if (method !== HTTP_METHOD.DELETE) {
+			options.body = JSON.stringify(payload)
+		}
 	}
 
 	return fetch(url, options).then((jsonData) => jsonData.json())
