@@ -12,6 +12,8 @@ import styles from './app.module.css'
 
 export const App = () => {
 	const [todos, setTodos] = useState([])
+	const [searchPhrase, setSearchPhrase] = useState('')
+	const [isAlphabetSorting, setIsAlphabetSorting] = useState(false)
 
 	const onTodoAdd = () => {
 		setTodos(addTodoInTodos(todos))
@@ -57,12 +59,18 @@ export const App = () => {
 	}
 
 	useEffect(() => {
-		readTodos().then((loadedTodos) => setTodos(loadedTodos.reverse()))
-	}, [])
+		readTodos(searchPhrase, isAlphabetSorting).then((loadedTodos) =>
+			setTodos(loadedTodos)
+		)
+	}, [searchPhrase, isAlphabetSorting])
 
 	return (
 		<div className={styles.app}>
-			<ControlPanel onTodoAdd={onTodoAdd} />
+			<ControlPanel
+				onTodoAdd={onTodoAdd}
+				onSearch={setSearchPhrase}
+				onSorting={setIsAlphabetSorting}
+			/>
 			<div>
 				{todos.map(({ id, title, completed, isEditing = false }) => (
 					<Todo

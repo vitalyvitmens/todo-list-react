@@ -1,33 +1,12 @@
-import { useState } from 'react'
 import { Button } from '../button/button'
+import { Search, Sorting } from './components'
 import styles from './contral-panel.module.css'
 
-export const ControlPanel = ({onTodoAdd}) => {
-	const [searchPhrase, setSearchPhrase] = useState('')
-	const [isSortingEnabled, setIsSortingEnabled] = useState(false)
-
-	const onSearchPhraseChange = ({ target }) => {
-		setSearchPhrase(target.value)
-	}
-	const onSortingChange = ({ target }) => {
-		setIsSortingEnabled(target.checked)
-	}
-
+export const ControlPanel = ({ onTodoAdd, onSearch, onSorting }) => {
 	return (
 		<div className={styles.controlPanel}>
-			<input
-				className={styles.search}
-				type="text"
-				value={searchPhrase}
-				placeholder="Поиск..."
-				onChange={onSearchPhraseChange}
-			/>
-			<input
-				className={styles.sortingButton}
-				type="checkbox"
-				checked={isSortingEnabled}
-				onChange={onSortingChange}
-			/>
+			<Search onSearch={onSearch} />
+			<Sorting onSorting={onSorting} />
 			<Button onClick={onTodoAdd}>✚</Button>
 		</div>
 	)
